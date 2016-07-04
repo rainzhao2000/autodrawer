@@ -8,3 +8,6 @@ E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\obj\Debug\AutoDrawer.c
 E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\obj\Debug\AutoDrawer.exe
 E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\obj\Debug\AutoDrawer.pdb
 E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\obj\Debug\AutoDrawer.Form2.resources
+E:\rain\projects\autodrawer\AutoDrawer\bin\Debug\AutoDrawer.exe.config
+E:\rain\projects\autodrawer\AutoDrawer\obj\Debug\AutoDrawer.exe
+E:\rain\projects\autodrawer\AutoDrawer\obj\Debug\AutoDrawer.pdb
