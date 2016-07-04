@@ -1,0 +1,10 @@
+E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\bin\Debug\AutoDrawer.exe.config
+E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\bin\Debug\AutoDrawer.exe
+E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\bin\Debug\AutoDrawer.pdb
+E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\obj\Debug\AutoDrawer.csprojResolveAssemblyReference.cache
+E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\obj\Debug\AutoDrawer.Form1.resources
+E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\obj\Debug\AutoDrawer.Properties.Resources.resources
+E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\obj\Debug\AutoDrawer.csproj.GenerateResource.Cache
+E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\obj\Debug\AutoDrawer.exe
+E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\obj\Debug\AutoDrawer.pdb
+E:\rain\Visual Studio 2015\Projects\AutoDrawer\AutoDrawer\obj\Debug\AutoDrawer.Form2.resources
