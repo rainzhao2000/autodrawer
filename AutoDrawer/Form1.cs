@@ -29,7 +29,7 @@ namespace AutoDrawer
         int blackThreshold;
         int transparencyThreshold;
         int[,] pixels;
-        int[,] stack;
+        ArrayList stack;
         int pathInt = 36184527;
         bool finished;
         //This is a replacement for Cursor.Position in WinForms
@@ -41,6 +41,12 @@ namespace AutoDrawer
 
         public const int MOUSEEVENTF_LEFTDOWN = 0x02;
         public const int MOUSEEVENTF_LEFTUP = 0x04;
+
+        private class Position
+        {
+            public int x { get; set; }
+            public int y { get; set; }
+        }
 
         public Form1()
         {
@@ -279,7 +285,7 @@ new float[] {0, 0, 0, 0, 1}
             bool cont = true;
 
             // Draw all the areas
-            stack = createStack(100000);
+            stack = new ArrayList();
             for (int y = 0; y < image.Height; y += res)
             {
                 for (int x = 0; x < image.Width; x += res)
@@ -307,7 +313,7 @@ new float[] {0, 0, 0, 0, 1}
             return true;
         }
 
-        private bool drawArea(int[,] stack, int x, int y, int xorigin, int yorigin)
+        private bool drawArea(ArrayList stack, int x, int y, int xorigin, int yorigin)
         {
             int[] path = new int[8];
             bool cont;
@@ -440,37 +446,22 @@ new float[] {0, 0, 0, 0, 1}
             return listOfInts.ToArray();
         }
 
-        private int[,] createStack(int size)
+        private void push(ArrayList stack, int x, int y)
         {
-            stack = new int[size + 1, 2];
-            stack[0, 0] = 0;
-            stack[0, 1] = size;
-            return stack;
+            stack.Add(new Position { x = x, y = y });
         }
 
-        private void push(int[,] stack, int x, int y)
+        private bool pop(ArrayList stack, ref int x, ref int y)
         {
-            stack[0, 0] += 1;
-            /*
-            if (stack[0, 0] > stack[0, 1])
-            {
-                stack[0, 1] += 1000;
-                stack = (int[,])ResizeArray(stack, new int[] { stack[0, 1] + 1, 2 });
-            }
-            */
-            stack[stack[0, 0], 0] = x;
-            stack[stack[0, 0], 1] = y;
-        }
-
-        private bool pop(int[,] stack, ref int x, ref int y)
-        {
-            if (stack[0, 0] < 1)
+            if (stack.Count < 1)
                 return false;
 
-            x = stack[stack[0, 0], 0];
-            y = stack[stack[0, 0], 1];
+            Position pos = (Position)stack[stack.Count - 1];
 
-            stack[0, 0] -= 1;
+            x = pos.x;
+            y = pos.y;
+
+            stack.Remove(pos);
             return true;
         }
 
@@ -485,18 +476,6 @@ new float[] {0, 0, 0, 0, 1}
                         pixels[x, y] = 1;
                 }
             }
-        }
-
-        private static Array ResizeArray(Array arr, int[] newSizes)
-        {
-            if (newSizes.Length != arr.Rank)
-                throw new ArgumentException("arr must have the same number of dimensions " +
-                                            "as there are elements in newSizes", "newSizes");
-
-            var temp = Array.CreateInstance(arr.GetType().GetElementType(), newSizes);
-            int length = arr.Length <= temp.Length ? arr.Length : temp.Length;
-            Array.ConstrainedCopy(arr, 0, temp, 0, length);
-            return temp;
         }
 
         private static void NOP(long durationTicks)
