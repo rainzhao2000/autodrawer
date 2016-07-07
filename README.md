@@ -1,5 +1,5 @@
 # Auto Drawer
 
-Auto drawer is a program that draws an image by controlling mouse movement and mouse clicks.
+Auto drawer is a program that draws an image by controlling mouse movement and mouse clicks. Original logic by CoePSX on Autoit.
 
-<img src="./autodrawerdemo.gif" width="400" />
+<img src="./autodrawerdemo.gif" width="600" />
