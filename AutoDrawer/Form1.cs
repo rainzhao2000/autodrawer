@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AutoDrawer
@@ -25,13 +20,16 @@ namespace AutoDrawer
         int height;
         int startDelay;
         int interval;
-        int speed;
         int blackThreshold;
         int transparencyThreshold;
         int[,] pixels;
         ArrayList stack;
-        int pathInt = 36184527;
+        PathIntegers horizontal = new PathIntegers { name = "horizontal", path = 45273618 };
+        PathIntegers vertical = new PathIntegers { name = "vertical", path = 27453618 };
+        PathIntegers diagonal = new PathIntegers { name = "diagonal", path = 36184527 };
+        int pathInt = 12345678;
         bool finished;
+
         //This is a replacement for Cursor.Position in WinForms
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern bool SetCursorPos(int x, int y);
@@ -42,12 +40,6 @@ namespace AutoDrawer
         public const int MOUSEEVENTF_LEFTDOWN = 0x02;
         public const int MOUSEEVENTF_LEFTUP = 0x04;
 
-        private class Position
-        {
-            public int x { get; set; }
-            public int y { get; set; }
-        }
-
         public Form1()
         {
             InitializeComponent();
@@ -56,7 +48,11 @@ namespace AutoDrawer
             transparencyThreshold = (int)transThreshNumeric.Value;
             interval = Convert.ToInt32(intervalInput.Text);
             interval = int.Parse(intervalInput.Text);
-            speed = (int)speedNumeric.Value;
+            pathList.Items.Add(horizontal);
+            pathList.Items.Add(vertical);
+            pathList.Items.Add(diagonal);
+            pathList.SetSelected(2, true);
+            pathInt = ((PathIntegers)pathList.SelectedItem).path;
         }
 
         private void uploadButton_Click(object sender, EventArgs e)
@@ -161,10 +157,9 @@ namespace AutoDrawer
             }
         }
 
-        private void speedNumeric_ValueChanged(object sender, EventArgs e)
+        private void pathList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Drawing speed, or number of pixels skipped in scan
-            speed = (int)speedNumeric.Value;
+            pathInt = ((PathIntegers)pathList.SelectedItem).path;
         }
 
         private void processButton_Click(object sender, EventArgs e)
@@ -196,8 +191,8 @@ namespace AutoDrawer
             try
             {
                 Thread.Sleep(startDelay);
-                finished = draw(speed);
-                Thread.Sleep(10);
+                finished = draw();
+                Thread.Sleep(100);
                 if (finished == true)
                     MessageBox.Show("Drawing Complete", "Done", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 else
@@ -274,9 +269,8 @@ new float[] {0, 0, 0, 0, 1}
             return image;
         }
 
-        private bool draw(int res)
+        private bool draw()
         {
-            // draws each black pixel in image
             Point mouseCenter = Cursor.Position;
             int xorigin = mouseCenter.X - (image.Width / 2);
             int yorigin = mouseCenter.Y - (image.Height / 2);
@@ -286,9 +280,9 @@ new float[] {0, 0, 0, 0, 1}
 
             // Draw all the areas
             stack = new ArrayList();
-            for (int y = 0; y < image.Height; y += res)
+            for (int y = 0; y < image.Height; y++)
             {
-                for (int x = 0; x < image.Width; x += res)
+                for (int x = 0; x < image.Width; x++)
                 {
                     Application.DoEvents();
                     if (ModifierKeys == Keys.Alt)
@@ -327,6 +321,15 @@ new float[] {0, 0, 0, 0, 1}
                 NOP(interval);
                 SetCursorPos(xorigin + x, yorigin + y);
                 pixels[x, y] = 2;
+                /*
+		        +---+---+---+
+		        | 1 | 2 | 3 |
+		        +---+---+---+
+		        | 4 |   | 5 |
+		        +---+---+---+
+		        | 6 | 7 | 8 |
+		        +---+---+---+
+                */
                 cont = false;
                 foreach (int i in Enumerable.Range(0, 7))
                 {
@@ -488,5 +491,17 @@ new float[] {0, 0, 0, 0, 1}
 
             }
         }
+    }
+
+    class Position
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+    }
+
+    class PathIntegers
+    {
+        public string name { get; set; }
+        public int path { get; set; }
     }
 }

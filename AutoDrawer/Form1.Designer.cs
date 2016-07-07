@@ -40,7 +40,7 @@
             this.clearButton = new System.Windows.Forms.Button();
             this.uploadButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.speedNumeric = new System.Windows.Forms.NumericUpDown();
+            this.pathList = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.intervalInput = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -61,7 +61,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.blackThreshNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startDelayNumeric)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.speedNumeric)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -226,7 +225,7 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.speedNumeric);
+            this.panel2.Controls.Add(this.pathList);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.intervalInput);
             this.panel2.Controls.Add(this.label2);
@@ -239,38 +238,28 @@
             this.panel2.Size = new System.Drawing.Size(383, 202);
             this.panel2.TabIndex = 2;
             // 
-            // speedNumeric
+            // pathList
             // 
-            this.speedNumeric.Location = new System.Drawing.Point(174, 157);
-            this.speedNumeric.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.speedNumeric.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.speedNumeric.Name = "speedNumeric";
-            this.speedNumeric.Size = new System.Drawing.Size(100, 26);
-            this.speedNumeric.TabIndex = 9;
-            this.speedNumeric.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.speedNumeric.ValueChanged += new System.EventHandler(this.speedNumeric_ValueChanged);
+            this.pathList.DisplayMember = "name";
+            this.pathList.FormattingEnabled = true;
+            this.pathList.ItemHeight = 20;
+            this.pathList.Location = new System.Drawing.Point(153, 166);
+            this.pathList.Name = "pathList";
+            this.pathList.ScrollAlwaysVisible = true;
+            this.pathList.Size = new System.Drawing.Size(221, 24);
+            this.pathList.TabIndex = 9;
+            this.pathList.ValueMember = "path";
+            this.pathList.SelectedIndexChanged += new System.EventHandler(this.pathList_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 157);
+            this.label5.Location = new System.Drawing.Point(8, 166);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(155, 22);
+            this.label5.Size = new System.Drawing.Size(139, 22);
             this.label5.TabIndex = 8;
-            this.label5.Text = "Resolution ratio :1";
+            this.label5.Text = "Drawing Pattern";
             // 
             // intervalInput
             // 
@@ -409,7 +398,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.startDelayNumeric)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.speedNumeric)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
@@ -438,14 +426,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown transThreshNumeric;
         private System.Windows.Forms.NumericUpDown blackThreshNumeric;
-        private System.Windows.Forms.NumericUpDown speedNumeric;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox widthInput;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox heightInput;
+        private System.Windows.Forms.ListBox pathList;
+        private System.Windows.Forms.Label label5;
     }
 }
 
