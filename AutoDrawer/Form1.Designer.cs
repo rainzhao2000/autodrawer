@@ -44,7 +44,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.intervalInput = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.previewButton = new System.Windows.Forms.Button();
             this.processButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -54,6 +53,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.heightInput = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -225,11 +225,11 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.pathList);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.intervalInput);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.previewButton);
             this.panel2.Controls.Add(this.processButton);
             this.panel2.Controls.Add(this.startButton);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -280,19 +280,6 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Interval (100 nanoseconds)";
             // 
-            // previewButton
-            // 
-            this.previewButton.AutoSize = true;
-            this.previewButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.previewButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.previewButton.Location = new System.Drawing.Point(0, 77);
-            this.previewButton.Name = "previewButton";
-            this.previewButton.Size = new System.Drawing.Size(383, 32);
-            this.previewButton.TabIndex = 5;
-            this.previewButton.Text = "Preview Image";
-            this.previewButton.UseVisualStyleBackColor = true;
-            this.previewButton.Click += new System.EventHandler(this.previewButton_Click);
-            // 
             // processButton
             // 
             this.processButton.AutoSize = true;
@@ -315,7 +302,7 @@
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(383, 42);
             this.startButton.TabIndex = 2;
-            this.startButton.Text = "START (press alt to stop)";
+            this.startButton.Text = "START";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
@@ -380,6 +367,16 @@
     "s (*.*)|*.*";
             this.openFileDialog1.Title = "Select a picture file";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(3, 95);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(382, 22);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "On start, press SHIFT to draw and ALT to stop";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -419,7 +416,6 @@
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button processButton;
-        private System.Windows.Forms.Button previewButton;
         private System.Windows.Forms.TextBox intervalInput;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
@@ -434,6 +430,7 @@
         private System.Windows.Forms.TextBox heightInput;
         private System.Windows.Forms.ListBox pathList;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label8;
     }
 }
 

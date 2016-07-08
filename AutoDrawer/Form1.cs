@@ -24,10 +24,10 @@ namespace AutoDrawer
         int transparencyThreshold;
         int[,] pixels;
         ArrayList stack;
-        PathIntegers horizontal = new PathIntegers { name = "horizontal", path = 45273618 };
-        PathIntegers vertical = new PathIntegers { name = "vertical", path = 27453618 };
-        PathIntegers diagonal = new PathIntegers { name = "diagonal", path = 36184527 };
-        int pathInt = 12345678;
+        PathIntegers horizontal = new PathIntegers { name = "horizontal", path = 12345678 };
+        PathIntegers vertical = new PathIntegers { name = "vertical", path = 14627358 };
+        PathIntegers diagonal = new PathIntegers { name = "diagonal", path = 26573481 };
+        int pathInt;
         bool finished;
 
         //This is a replacement for Cursor.Position in WinForms
@@ -178,19 +178,38 @@ namespace AutoDrawer
             }
         }
 
-        private void previewButton_Click(object sender, EventArgs e)
-        {
-            // Opens new window with image preview
-            Form2 m = new Form2();
-            m.Show();
-        }
-
         private void startButton_Click(object sender, EventArgs e)
         {
             // Starts drawing
+            Form2 m = new Form2();
+            int xpos;
+            int ypos;
+            m.Show();
+            this.WindowState = FormWindowState.Minimized;
+            while (true)
+            {
+                Application.DoEvents();
+                if (ModifierKeys == Keys.Alt)
+                {
+                    m.Close();
+                    break;
+                }
+                if (ModifierKeys == Keys.Shift)
+                {
+                    m.Close();
+                    start();
+                    break;
+                }
+                xpos = Cursor.Position.X - m.Width / 2;
+                ypos = Cursor.Position.Y - m.Height / 2;
+                m.Location = new Point(xpos, ypos);
+            }
+        }
+
+        private void start()
+        {
             try
             {
-                Thread.Sleep(startDelay);
                 finished = draw();
                 Thread.Sleep(100);
                 if (finished == true)
