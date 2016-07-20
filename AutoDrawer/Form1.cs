@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -18,7 +19,6 @@ namespace AutoDrawer
         public static Bitmap imagePreview;
         int width;
         int height;
-        int startDelay;
         int interval;
         int blackThreshold;
         int transparencyThreshold;
@@ -31,10 +31,10 @@ namespace AutoDrawer
         bool finished;
 
         //This is a replacement for Cursor.Position in WinForms
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [DllImport("user32.dll")]
         static extern bool SetCursorPos(int x, int y);
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
         public const int MOUSEEVENTF_LEFTDOWN = 0x02;
@@ -43,7 +43,6 @@ namespace AutoDrawer
         public Form1()
         {
             InitializeComponent();
-            startDelay = (int)startDelayNumeric.Value * 1000;
             blackThreshold = (int)blackThreshNumeric.Value;
             transparencyThreshold = (int)transThreshNumeric.Value;
             interval = Convert.ToInt32(intervalInput.Text);
@@ -125,12 +124,6 @@ namespace AutoDrawer
             imagePreview = image;
         }
 
-        private void startDelayNumeric_ValueChanged(object sender, EventArgs e)
-        {
-            // Converts start delayed seconds into miliseconds
-            startDelay = (int)startDelayNumeric.Value * 1000;
-        }
-
         private void blackThreshNumeric_ValueChanged(object sender, EventArgs e)
         {
             // Threshold at which a pixel is deemed black
@@ -174,36 +167,41 @@ namespace AutoDrawer
             }
             catch (Exception)
             {
-                MessageBox.Show("No image was found", "Image Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show(new Form() { TopMost = true }, "No image was found", "Image Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
         private void startButton_Click(object sender, EventArgs e)
         {
             // Starts drawing
-            Form2 m = new Form2();
-            int xpos;
-            int ypos;
-            m.Show();
-            this.WindowState = FormWindowState.Minimized;
-            while (true)
+            try
             {
-                Application.DoEvents();
-                if (ModifierKeys == Keys.Alt)
+                int width = imagePreview.Width; Form2 m = new Form2();
+                m.Show();
+                this.WindowState = FormWindowState.Minimized;
+                while (true)
                 {
-                    m.Close();
-                    break;
+                    Application.DoEvents();
+                    if (ModifierKeys == Keys.Alt)
+                    {
+                        m.Close();
+                        break;
+                    }
+                    if (ModifierKeys == Keys.Shift)
+                    {
+                        m.Close();
+                        start();
+                        break;
+                    }
+                    int xpos = Cursor.Position.X - m.Width / 2;
+                    int ypos = Cursor.Position.Y - m.Height / 2 - 20;
+                    m.Location = new Point(xpos, ypos);
                 }
-                if (ModifierKeys == Keys.Shift)
-                {
-                    m.Close();
-                    start();
-                    break;
-                }
-                xpos = Cursor.Position.X - m.Width / 2;
-                ypos = Cursor.Position.Y - m.Height / 2;
-                m.Location = new Point(xpos, ypos);
             }
+            catch (Exception)
+            {
+                MessageBox.Show(new Form() { TopMost = true }, "No image was found", "Image Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }            
         }
 
         private void start()
@@ -211,15 +209,14 @@ namespace AutoDrawer
             try
             {
                 finished = draw();
-                Thread.Sleep(100);
                 if (finished == true)
-                    MessageBox.Show("Drawing Complete", "Done", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show(new Form() { TopMost = true }, "Drawing Complete", "Done", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 else
-                    MessageBox.Show("Drawing halted", "Incomplete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show(new Form() { TopMost = true }, "Drawing halted", "Incomplete", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             catch (Exception)
             {
-                MessageBox.Show("No image was found", "Image Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show(new Form() { TopMost = true }, "No image was found", "Image Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 

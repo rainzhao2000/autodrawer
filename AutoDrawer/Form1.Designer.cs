@@ -35,11 +35,10 @@
             this.blackThreshNumeric = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.startDelayNumeric = new System.Windows.Forms.NumericUpDown();
             this.clearButton = new System.Windows.Forms.Button();
             this.uploadButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.pathList = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.intervalInput = new System.Windows.Forms.TextBox();
@@ -53,13 +52,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.heightInput = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transThreshNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackThreshNumeric)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.startDelayNumeric)).BeginInit();
             this.panel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -102,9 +99,9 @@
             this.panel1.Controls.Add(this.transThreshNumeric);
             this.panel1.Controls.Add(this.blackThreshNumeric);
             this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.intervalInput);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.startDelayNumeric);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.clearButton);
             this.panel1.Controls.Add(this.uploadButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -169,34 +166,6 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Black Threshold (0-255)";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 95);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 22);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Start Delay (s)";
-            // 
-            // startDelayNumeric
-            // 
-            this.startDelayNumeric.Location = new System.Drawing.Point(140, 95);
-            this.startDelayNumeric.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.startDelayNumeric.Name = "startDelayNumeric";
-            this.startDelayNumeric.Size = new System.Drawing.Size(87, 26);
-            this.startDelayNumeric.TabIndex = 2;
-            this.startDelayNumeric.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.startDelayNumeric.ValueChanged += new System.EventHandler(this.startDelayNumeric_ValueChanged);
-            // 
             // clearButton
             // 
             this.clearButton.AutoSize = true;
@@ -228,8 +197,6 @@
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.pathList);
             this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.intervalInput);
-            this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.processButton);
             this.panel2.Controls.Add(this.startButton);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -238,15 +205,25 @@
             this.panel2.Size = new System.Drawing.Size(383, 202);
             this.panel2.TabIndex = 2;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label8.Location = new System.Drawing.Point(0, 95);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(326, 22);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Must process image before drawing";
+            // 
             // pathList
             // 
             this.pathList.DisplayMember = "name";
             this.pathList.FormattingEnabled = true;
             this.pathList.ItemHeight = 20;
-            this.pathList.Location = new System.Drawing.Point(153, 166);
+            this.pathList.Location = new System.Drawing.Point(148, 128);
             this.pathList.Name = "pathList";
-            this.pathList.ScrollAlwaysVisible = true;
-            this.pathList.Size = new System.Drawing.Size(221, 24);
+            this.pathList.Size = new System.Drawing.Size(221, 64);
             this.pathList.TabIndex = 9;
             this.pathList.ValueMember = "path";
             this.pathList.SelectedIndexChanged += new System.EventHandler(this.pathList_SelectedIndexChanged);
@@ -255,7 +232,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(8, 166);
+            this.label5.Location = new System.Drawing.Point(3, 134);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(139, 22);
             this.label5.TabIndex = 8;
@@ -263,7 +240,7 @@
             // 
             // intervalInput
             // 
-            this.intervalInput.Location = new System.Drawing.Point(235, 125);
+            this.intervalInput.Location = new System.Drawing.Point(241, 95);
             this.intervalInput.Name = "intervalInput";
             this.intervalInput.Size = new System.Drawing.Size(139, 26);
             this.intervalInput.TabIndex = 7;
@@ -274,7 +251,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 126);
+            this.label2.Location = new System.Drawing.Point(9, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(227, 22);
             this.label2.TabIndex = 6;
@@ -367,16 +344,6 @@
     "s (*.*)|*.*";
             this.openFileDialog1.Title = "Select a picture file";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(3, 95);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(382, 22);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "On start, press SHIFT to draw and ALT to stop";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -392,7 +359,6 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transThreshNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackThreshNumeric)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.startDelayNumeric)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -411,8 +377,6 @@
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button uploadButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown startDelayNumeric;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button processButton;
