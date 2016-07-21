@@ -24,9 +24,9 @@ namespace AutoDrawer
         int transparencyThreshold;
         int[,] pixels;
         ArrayList stack;
-        PathIntegers horizontal = new PathIntegers { name = "horizontal", path = 12345678 };
-        PathIntegers vertical = new PathIntegers { name = "vertical", path = 14627358 };
-        PathIntegers diagonal = new PathIntegers { name = "diagonal", path = 26573481 };
+        PathIntegers horizontal = new PathIntegers { name = "horizontal - 12345678", path = 12345678 };
+        PathIntegers vertical = new PathIntegers { name = "vertical - 14627358", path = 14627358 };
+        PathIntegers diagonal = new PathIntegers { name = "diagonal - 26573481", path = 26573481 };
         int pathInt;
         bool finished;
 
@@ -152,7 +152,26 @@ namespace AutoDrawer
 
         private void pathList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pathInt = ((PathIntegers)pathList.SelectedItem).path;
+            try
+            {
+                pathInt = ((PathIntegers)pathList.SelectedItem).path;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void customButton_Click(object sender, EventArgs e)
+        {
+            Form3 m = new Form3();
+            m.FormClosed += new FormClosedEventHandler(Form1_FormClosed);
+        }
+
+        void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            pathList.ClearSelected();
+            pathInt = Form3.pathInt;
+            Console.WriteLine("path: {0}", pathInt);
         }
 
         private void processButton_Click(object sender, EventArgs e)
@@ -167,7 +186,7 @@ namespace AutoDrawer
             }
             catch (Exception)
             {
-                MessageBox.Show(new Form() { TopMost = true }, "No image was found", "Image Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show(new Form() { TopMost = true }, "No image was found", "Process Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -176,9 +195,10 @@ namespace AutoDrawer
             // Starts drawing
             try
             {
-                int width = imagePreview.Width; Form2 m = new Form2();
+                int width = imagePreview.Width;
+                Form2 m = new Form2();
                 m.Show();
-                this.WindowState = FormWindowState.Minimized;
+                WindowState = FormWindowState.Minimized;
                 while (true)
                 {
                     Application.DoEvents();
@@ -190,6 +210,7 @@ namespace AutoDrawer
                     if (ModifierKeys == Keys.Shift)
                     {
                         m.Close();
+                        //Console.WriteLine("path: {0}", pathInt);
                         start();
                         break;
                     }
@@ -201,7 +222,7 @@ namespace AutoDrawer
             catch (Exception)
             {
                 MessageBox.Show(new Form() { TopMost = true }, "No image was found", "Image Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            }            
+            }        
         }
 
         private void start()
@@ -216,7 +237,8 @@ namespace AutoDrawer
             }
             catch (Exception)
             {
-                MessageBox.Show(new Form() { TopMost = true }, "No image was found", "Image Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show(new Form() { TopMost = true }, "No image was found", "Drawing Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                //Console.WriteLine("path: {0}", pathInt);
             }
         }
 

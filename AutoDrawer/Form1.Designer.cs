@@ -34,15 +34,16 @@
             this.transThreshNumeric = new System.Windows.Forms.NumericUpDown();
             this.blackThreshNumeric = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
+            this.intervalInput = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.clearButton = new System.Windows.Forms.Button();
             this.uploadButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.customButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.pathList = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.intervalInput = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.processButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -156,6 +157,16 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Transparency Threshold (0-255)";
             // 
+            // intervalInput
+            // 
+            this.intervalInput.Location = new System.Drawing.Point(241, 95);
+            this.intervalInput.MaxLength = 10;
+            this.intervalInput.Name = "intervalInput";
+            this.intervalInput.Size = new System.Drawing.Size(139, 26);
+            this.intervalInput.TabIndex = 7;
+            this.intervalInput.Text = "1000";
+            this.intervalInput.TextChanged += new System.EventHandler(this.intervalInput_TextChanged);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -165,6 +176,16 @@
             this.label3.Size = new System.Drawing.Size(203, 22);
             this.label3.TabIndex = 4;
             this.label3.Text = "Black Threshold (0-255)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(9, 95);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(227, 22);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Interval (100 nanoseconds)";
             // 
             // clearButton
             // 
@@ -194,6 +215,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.customButton);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.pathList);
             this.panel2.Controls.Add(this.label5);
@@ -204,6 +226,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(383, 202);
             this.panel2.TabIndex = 2;
+            // 
+            // customButton
+            // 
+            this.customButton.AutoSize = true;
+            this.customButton.Location = new System.Drawing.Point(4, 159);
+            this.customButton.Name = "customButton";
+            this.customButton.Size = new System.Drawing.Size(138, 30);
+            this.customButton.TabIndex = 11;
+            this.customButton.Text = "Custom";
+            this.customButton.UseVisualStyleBackColor = true;
+            this.customButton.Click += new System.EventHandler(this.customButton_Click);
             // 
             // label8
             // 
@@ -237,25 +270,6 @@
             this.label5.Size = new System.Drawing.Size(139, 22);
             this.label5.TabIndex = 8;
             this.label5.Text = "Drawing Pattern";
-            // 
-            // intervalInput
-            // 
-            this.intervalInput.Location = new System.Drawing.Point(241, 95);
-            this.intervalInput.Name = "intervalInput";
-            this.intervalInput.Size = new System.Drawing.Size(139, 26);
-            this.intervalInput.TabIndex = 7;
-            this.intervalInput.Text = "1000";
-            this.intervalInput.TextChanged += new System.EventHandler(this.intervalInput_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 95);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(227, 22);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Interval (100 nanoseconds)";
             // 
             // processButton
             // 
@@ -395,6 +409,7 @@
         private System.Windows.Forms.ListBox pathList;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button customButton;
     }
 }
 
