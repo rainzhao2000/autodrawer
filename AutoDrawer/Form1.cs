@@ -22,7 +22,7 @@ namespace AutoDrawer
         int interval;
         int blackThreshold;
         int transparencyThreshold;
-        int[,] pixels;
+        int[,] pixelArray;
         ArrayList stack;
         PathIntegers horizontal = new PathIntegers { name = "horizontal - 12345678", path = 12345678 };
         PathIntegers vertical = new PathIntegers { name = "vertical - 14627358", path = 14627358 };
@@ -171,7 +171,6 @@ namespace AutoDrawer
         {
             pathList.ClearSelected();
             pathInt = Form3.pathInt;
-            Console.WriteLine("path: {0}", pathInt);
         }
 
         private void processButton_Click(object sender, EventArgs e)
@@ -195,7 +194,7 @@ namespace AutoDrawer
             // Starts drawing
             try
             {
-                int width = imagePreview.Width;
+                int imageTest = imagePreview.Width;
                 Form2 m = new Form2();
                 m.Show();
                 WindowState = FormWindowState.Minimized;
@@ -210,12 +209,11 @@ namespace AutoDrawer
                     if (ModifierKeys == Keys.Shift)
                     {
                         m.Close();
-                        //Console.WriteLine("path: {0}", pathInt);
                         start();
                         break;
                     }
                     int xpos = Cursor.Position.X - m.Width / 2;
-                    int ypos = Cursor.Position.Y - m.Height / 2 - 20;
+                    int ypos = Cursor.Position.Y - m.Height / 2 - 18;
                     m.Location = new Point(xpos, ypos);
                 }
             }
@@ -286,7 +284,7 @@ new float[] {0, 0, 0, 0, 1}
         private Bitmap scan(Bitmap image, int blackThreshold, int transparencyThreshold)
         {
             // Scans each pixel in image and gives it a black or white value
-            pixels = new int[image.Width, image.Height];
+            pixelArray = new int[image.Width, image.Height];
             for (int y = 0; y < image.Height; y++)
             {
                 for (int x = 0; x < image.Width; x++)
@@ -295,12 +293,12 @@ new float[] {0, 0, 0, 0, 1}
                     if ((pixel.R < blackThreshold | pixel.G < blackThreshold | pixel.B < blackThreshold) && pixel.A > transparencyThreshold)
                     {
                         image.SetPixel(x, y, Color.Black);
-                        pixels[x, y] = 1;
+                        pixelArray[x, y] = 1;
                     }
                     else
                     {
                         image.SetPixel(x, y, Color.White);
-                        pixels[x, y] = 0;
+                        pixelArray[x, y] = 0;
                     }
                 }
             }
@@ -325,7 +323,7 @@ new float[] {0, 0, 0, 0, 1}
                     Application.DoEvents();
                     if (ModifierKeys == Keys.Alt)
                         return false;
-                    if (pixels[x, y] == 1)
+                    if (pixelArray[x, y] == 1)
                     {
                         xpos = xorigin + x;
                         ypos = yorigin + y;
@@ -358,7 +356,7 @@ new float[] {0, 0, 0, 0, 1}
                     return false;
                 NOP(interval);
                 SetCursorPos(xorigin + x, yorigin + y);
-                pixels[x, y] = 2;
+                pixelArray[x, y] = 2;
                 /*
 		        +---+---+---+
 		        | 1 | 2 | 3 |
@@ -376,7 +374,7 @@ new float[] {0, 0, 0, 0, 1}
                         case 1:
                             if ((x > 0) && (y > 0))
                             {
-                                if (pixels[x - 1, y - 1] == 1)
+                                if (pixelArray[x - 1, y - 1] == 1)
                                 {
                                     push(stack, x, y);
                                     x -= 1;
@@ -388,7 +386,7 @@ new float[] {0, 0, 0, 0, 1}
                         case 2:
                             if (y > 0)
                             {
-                                if (pixels[x, y - 1] == 1)
+                                if (pixelArray[x, y - 1] == 1)
                                 {
                                     push(stack, x, y);
                                     y -= 1;
@@ -399,7 +397,7 @@ new float[] {0, 0, 0, 0, 1}
                         case 3:
                             if ((x > 0) && (y < 0))
                             {
-                                if (pixels[x + 1, y - 1] == 1)
+                                if (pixelArray[x + 1, y - 1] == 1)
                                 {
                                     push(stack, x, y);
                                     x += 1;
@@ -411,7 +409,7 @@ new float[] {0, 0, 0, 0, 1}
                         case 4:
                             if (x > 0)
                             {
-                                if (pixels[x - 1, y] == 1)
+                                if (pixelArray[x - 1, y] == 1)
                                 {
                                     push(stack, x, y);
                                     x -= 1;
@@ -422,7 +420,7 @@ new float[] {0, 0, 0, 0, 1}
                         case 5:
                             if (x < (image.Width - 1))
                             {
-                                if (pixels[x + 1, y] == 1)
+                                if (pixelArray[x + 1, y] == 1)
                                 {
                                     push(stack, x, y);
                                     x += 1;
@@ -433,7 +431,7 @@ new float[] {0, 0, 0, 0, 1}
                         case 6:
                             if ((x < 0) && (y > 0))
                             {
-                                if (pixels[x - 1, y + 1] == 1)
+                                if (pixelArray[x - 1, y + 1] == 1)
                                 {
                                     push(stack, x, y);
                                     x -= 1;
@@ -445,7 +443,7 @@ new float[] {0, 0, 0, 0, 1}
                         case 7:
                             if (y < (image.Height - 1))
                             {
-                                if (pixels[x, y + 1] == 1)
+                                if (pixelArray[x, y + 1] == 1)
                                 {
                                     push(stack, x, y);
                                     y += 1;
@@ -456,7 +454,7 @@ new float[] {0, 0, 0, 0, 1}
                         case 8:
                             if ((x < (image.Width - 1)) && (y < (image.Height - 1)))
                             {
-                                if (pixels[x + 1, y + 1] == 1)
+                                if (pixelArray[x + 1, y + 1] == 1)
                                 {
                                     push(stack, x, y);
                                     x += 1;
@@ -513,8 +511,8 @@ new float[] {0, 0, 0, 0, 1}
             {
                 for (int x = 0; x < image.Width; x++)
                 {
-                    if (pixels[x, y] == 2)
-                        pixels[x, y] = 1;
+                    if (pixelArray[x, y] == 2)
+                        pixelArray[x, y] = 1;
                 }
             }
         }
