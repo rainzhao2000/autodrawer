@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.enterButton = new System.Windows.Forms.Button();
             this.pathInput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.enterButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +49,27 @@
             this.panel1.Size = new System.Drawing.Size(378, 434);
             this.panel1.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::AutoDrawer.Properties.Resources.pathguide;
+            this.pictureBox1.Location = new System.Drawing.Point(16, 74);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(350, 340);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
+            // enterButton
+            // 
+            this.enterButton.AutoSize = true;
+            this.enterButton.Location = new System.Drawing.Point(253, 38);
+            this.enterButton.Name = "enterButton";
+            this.enterButton.Size = new System.Drawing.Size(110, 30);
+            this.enterButton.TabIndex = 2;
+            this.enterButton.Text = "Enter";
+            this.enterButton.UseVisualStyleBackColor = true;
+            this.enterButton.Click += new System.EventHandler(this.enterButton_Click);
+            // 
             // pathInput
             // 
             this.pathInput.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -58,7 +79,7 @@
             this.pathInput.Name = "pathInput";
             this.pathInput.Size = new System.Drawing.Size(231, 26);
             this.pathInput.TabIndex = 1;
-            this.pathInput.Text = "enter 8 integers e.g 12345678";
+            this.pathInput.Text = "enter eight integers from 1-8";
             this.pathInput.TextChanged += new System.EventHandler(this.pathInput_TextChanged);
             // 
             // label1
@@ -72,27 +93,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Enter custom path int sequence";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // enterButton
-            // 
-            this.enterButton.AutoSize = true;
-            this.enterButton.Location = new System.Drawing.Point(253, 38);
-            this.enterButton.Name = "enterButton";
-            this.enterButton.Size = new System.Drawing.Size(110, 30);
-            this.enterButton.TabIndex = 2;
-            this.enterButton.Text = "Enter";
-            this.enterButton.UseVisualStyleBackColor = true;
-            this.enterButton.Click += new System.EventHandler(this.enterButton_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::AutoDrawer.Properties.Resources.pathguide;
-            this.pictureBox1.Location = new System.Drawing.Point(16, 74);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(350, 340);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
             // 
             // Form3
             // 

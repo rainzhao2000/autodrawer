@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AutoDrawer
@@ -34,11 +29,19 @@ namespace AutoDrawer
                 pathInt = int.Parse(input);
                 if (pathInt.ToString().Length < 8)
                     throw new Exception();
+                var digits = pathInt.ToString().Select(t => int.Parse(t.ToString())).ToArray();
+                foreach (int item in digits)
+                {
+                    if (item == 9 | item == 0)
+                    {
+                        throw new Exception();
+                    }
+                }
                 Close();
             }
             catch (Exception)
             {
-                MessageBox.Show(new Form() { TopMost = true }, "Please enter a sequence of 8 integers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show(new Form() { TopMost = true }, "Please enter a sequence of 8 integers from 1-8", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
     }

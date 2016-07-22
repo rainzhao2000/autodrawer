@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace AutoDrawer
@@ -345,9 +344,8 @@ new float[] {0, 0, 0, 0, 1}
 
         private bool drawArea(ArrayList stack, int x, int y, int xorigin, int yorigin)
         {
-            int[] path = new int[8];
             bool cont;
-            path = makePath(pathInt);
+            var path = pathInt.ToString().Select(t => int.Parse(t.ToString())).ToArray();
 
             while (true)
             {
@@ -471,18 +469,6 @@ new float[] {0, 0, 0, 0, 1}
                     break;
             }
             return true;
-        }
-
-        private int[] makePath(int pathInt)
-        {
-            List<int> listOfInts = new List<int>();
-            while (pathInt > 0)
-            {
-                listOfInts.Add(pathInt % 10);
-                pathInt /= 10;
-            }
-            listOfInts.Reverse();
-            return listOfInts.ToArray();
         }
 
         private void push(ArrayList stack, int x, int y)
